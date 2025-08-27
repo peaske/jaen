@@ -29,16 +29,16 @@ npm install
 ```
 
 ### Configuration
-Copy the example environment file and add your credentials:
+Copy the template environment file and add your credentials:
 ```bash
-cp .env.example .env
+cp .env.template .env
 ```
 
 Edit `.env` with your actual tokens:
 ```env
-DISCORD_TOKEN=your_discord_bot_token
-GOOGLE_API_KEY=your_google_translate_api_key
-ALLOWED_CHANNEL_IDS=channel1,channel2 # Optional: restrict to specific channels
+BOT_TOKEN_VALUE=your_discord_bot_token
+TRANSLATE_API_KEY=your_google_translate_api_key
+CHANNEL_FILTER_IDS=channel1,channel2 # Optional: restrict to specific channels
 ```
 
 **⚠️ Security Note**: Never commit `.env` file to version control. Keep your tokens secure.

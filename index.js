@@ -5,8 +5,8 @@ const { Client, GatewayIntentBits, Events } = require('discord.js');
 const VERSION = '2.0.0';
 
 console.log(`🚀 JAEN v${VERSION} 起動中...`);
-console.log('Discord Token:', process.env.DISCORD_TOKEN ? '設定済み' : '未設定');
-console.log('Google API Key:', process.env.GOOGLE_API_KEY ? '設定済み' : '未設定');
+console.log('Discord Token:', process.env.BOT_TOKEN_VALUE ? '設定済み' : '未設定');
+console.log('Google API Key:', process.env.TRANSLATE_API_KEY ? '設定済み' : '未設定');
 
 // Discord クライアント
 const client = new Client({
@@ -63,7 +63,7 @@ function skip(msg) {
 // Google Translation API呼び出し
 async function translateToEnglish(text) {
   try {
-    const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${process.env.GOOGLE_API_KEY}`, {
+    const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${process.env.TRANSLATE_API_KEY}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -144,7 +144,7 @@ client.on('warn', warning => {
 
 // ログイン
 console.log('🔐 Discordにログイン中...');
-client.login(process.env.DISCORD_TOKEN)
+client.login(process.env.BOT_TOKEN_VALUE)
   .catch(error => {
     console.error('❌ ログイン失敗:', error);
     process.exit(1);
