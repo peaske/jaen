@@ -6,11 +6,15 @@ JAEN (Japanese + English) is a Discord bot that automatically translates Japanes
 ## Features
 - **Smart Language Detection**: Differentiates between Japanese text with English words vs. English grammatical structures
 - **Real-time Translation**: Uses Google Cloud Translation API for high-quality translations
-- **Noise Filtering**: Ignores URLs, code blocks, images, and bot messages
+- **URL Summary**: Automatically extracts and summarizes webpage content (title, description, author) in both Japanese and English
+- **Format Preservation**: Maintains line breaks and Discord markdown formatting in translations
+- **Noise Filtering**: Ignores code blocks, images, and bot messages
 - **Channel Restrictions**: Configurable per-channel operation
 - **Debug Logging**: Comprehensive logging for monitoring and troubleshooting
 
 ## Version History
+- **v2.1.0**: URL summary feature - extracts webpage metadata (title, description, author) and displays in Japanese & English
+- **v2.0.1**: Format preservation - maintains line breaks and Discord markdown (bold, italic, etc.) in translations
 - **v2.0.0**: Enhanced Japanese detection logic - allows English words within Japanese sentences
 - **v1.0.0**: Initial release with strict Japanese-only detection
 
@@ -50,14 +54,17 @@ node index.js
 
 ## Usage Examples
 
-**Will be translated (v2.0):**
+**Japanese Translation (v2.0+):**
 - "これはテストです" → "This is a test"
 - "GitHub使ってAPI開発してます" → "I'm developing an API using GitHub"
 - "ReactでUIコンポーネント作成中" → "Creating UI components with React"
 
+**URL Summary (v2.1.0):**
+- Post: "https://note.com/example/article"
+- Response: Webpage summary with title, description, author in Japanese & English
+
 **Will NOT be translated:**
 - "I am developing an API" (English grammatical structure)
-- "https://example.com" (URL only)
 - Mixed bot responses
 
 ## Technical Stack
@@ -88,6 +95,8 @@ JAEN（Japanese + English）は、日本語メッセージを自動で英語に�
 - **デバッグログ**: 詳細なログによる監視とトラブルシューティング
 
 ## バージョン履歴
+- **v2.1.0**: URL要約機能 - ウェブページのmeta情報（タイトル、概要、著者）を日英両言語で表示
+- **v2.0.1**: フォーマット保持機能 - 翻訳時に改行とDiscordマークダウン（太字、斜体等）を保持
 - **v2.0.0**: 日本語検出ロジック強化 - 日本語文中の英単語を許可
 - **v1.0.0**: 厳密な日本語のみ検出での初回リリース
 
@@ -120,14 +129,17 @@ node index.js
 
 ## 使用例
 
-**翻訳される (v2.0):**
+**日本語翻訳 (v2.0+):**
 - "これはテストです" → "This is a test"
 - "GitHub使ってAPI開発してます" → "I'm developing an API using GitHub"
 - "ReactでUIコンポーネント作成中" → "Creating UI components with React"
 
+**URL要約 (v2.1.0):**
+- 投稿: "https://note.com/example/article"
+- 応答: タイトル、概要、著者を日英両言語で表示
+
 **翻訳されない:**
 - "I am developing an API" (英語文法構造)
-- "https://example.com" (URLのみ)
 - Bot同士の応答
 
 ## 技術スタック
@@ -158,6 +170,8 @@ JAEN（Japanese + English）是一个Discord机器人，可以自动将日语消
 - **调试日志**: 全面的日志记录用于监控和故障排除
 
 ## 版本历史
+- **v2.1.0**: URL摘要功能 - 提取网页meta信息（标题、描述、作者）并以日英双语显示
+- **v2.0.1**: 格式保持功能 - 翻译时保持换行和Discord标记（粗体、斜体等）
 - **v2.0.0**: 增强的日语检测逻辑 - 允许日语句子中包含英语单词
 - **v1.0.0**: 仅限严格日语检测的初始版本
 

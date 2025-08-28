@@ -1,4 +1,4 @@
-// index.js (JAEN v2.1.0 - URL要約機能追加)
+// index.js (JAEN v2.0 - 日本語判定ロジック改良版)
 require('dotenv').config();
 const { Client, GatewayIntentBits, Events } = require('discord.js');
 const cheerio = require('cheerio');
@@ -276,44 +276,12 @@ async function translateToEnglish(text) {
 client.once(Events.ClientReady, () => {
   console.log(`✅ JAEN v${VERSION} ready as ${client.user.tag}`);
   console.log(`📊 サーバー数: ${client.guilds.cache.size}`);
-  console.log('🎯 翻訳・URL要約機能が有効になりました（v2.1.0）');
+  console.log('🎯 翻訳機能が有効になりました（v2: 英単語混在対応）');
 });
 
 client.on(Events.MessageCreate, async (msg) => {
   try {
-    // v2.1.0: URL要約機能のチェック
-    if (isUrl(msg.content)) {
-      console.log(`🔗 URL検出: "${msg.content}"`);
-      
-      // Botメッセージはスキップ
-      if (msg.author.bot) {
-        console.log('⏭️  スキップ理由: Bot投稿');
-        return;
-      }
-      
-      // チャンネル対象チェック
-      if (!inScope(msg.channelId)) {
-        console.log('⏭️  スキップ理由: 対象外チャンネル');
-        return;
-      }
-      
-      try {
-        console.log('🔄 URL要約開始...');
-        const metadata = await extractPageMetadata(msg.content.trim());
-        const summary = await createUrlSummary(metadata);
-        
-        console.log('✅ 要約完了');
-        await msg.reply(`**要約 (Auto v${VERSION}):**\n${summary}`);
-        console.log('📤 返信送信完了');
-        return;
-      } catch (error) {
-        console.error('❌ URL要約エラー:', error.message);
-        await msg.reply(`❌ 要約取得に失敗しました: ${error.message}`);
-        return;
-      }
-    }
-    
-    // 既存の翻訳機能 (v2.0.1)
+    // デバッグログ
     const shouldSkip = skip(msg);
     const isInScope = inScope(msg.channelId);
     const isJapMain = isJapaneseMain(msg.content);
@@ -324,7 +292,7 @@ client.on(Events.MessageCreate, async (msg) => {
     console.log(`  - 日本語主体: ${isJapMain}`);
     
     if (shouldSkip) {
-      console.log('⏭️  スキップ理由: Bot投稿/画像のみ/コードブロック');
+      console.log('⏭️  スキップ理由: Bot投稿/画像のみ/URL/コードブロック');
       return;
     }
     
